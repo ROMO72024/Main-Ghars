@@ -27,7 +27,7 @@
   <preference name="android-compileSdkVersion" value="36" />
   <preference name="AndroidWindowSplashScreenBackground" value="#F5F8F5" />
   <preference name="AndroidWindowSplashScreenIconBackgroundColor" value="#F5F8F5" />
-  <preference name="AndroidWindowSplashScreenAnimatedIcon" value="www/icon.png" />
+  <preference name="AndroidWindowSplashScreenAnimatedIcon" value="www/splash-icon.png" />
   <preference name="AndroidWindowSplashScreenAnimationDuration" value="250" />
 
   <icon src="www/icon.png" />
