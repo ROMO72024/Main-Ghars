@@ -1,0 +1,79 @@
+name: Build Ghars Digital Android
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+      KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android API 36
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+
+      - name: Install exact dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Add Android platform
+        run: npx cordova platform add android@15.1.0
+
+      - name: Build test APK
+        run: npx cordova build android --debug -- --packageType=apk
+
+      - name: Upload test APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Ghars-Digital-Test-APK
+          path: platforms/android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+
+      - name: Decode Play upload key
+        if: ${{ env.KEYSTORE_BASE64 != '' && env.KEYSTORE_PASSWORD != '' && env.KEY_ALIAS != '' && env.KEY_PASSWORD != '' }}
+        run: echo "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/ghars-upload.jks"
+
+      - name: Build signed Google Play bundle
+        if: ${{ env.KEYSTORE_BASE64 != '' && env.KEYSTORE_PASSWORD != '' && env.KEY_ALIAS != '' && env.KEY_PASSWORD != '' }}
+        run: >-
+          npx cordova build android --release --
+          --packageType=bundle
+          --keystore="$RUNNER_TEMP/ghars-upload.jks"
+          --storePassword="$KEYSTORE_PASSWORD"
+          --alias="$KEY_ALIAS"
+          --password="$KEY_PASSWORD"
+
+      - name: Upload signed AAB
+        if: ${{ env.KEYSTORE_BASE64 != '' && env.KEYSTORE_PASSWORD != '' && env.KEY_ALIAS != '' && env.KEY_PASSWORD != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Ghars-Digital-Google-Play-AAB
+          path: platforms/android/app/build/outputs/bundle/release/*.aab
+          if-no-files-found: error
