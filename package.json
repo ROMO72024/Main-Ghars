@@ -1,7 +1,7 @@
 {
   "name": "ghars-digital-app",
   "displayName": "غرس الرقمي",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "بوابة أنظمة مدرسة وروضة غرس الحديثة",
   "private": true,
   "scripts": {

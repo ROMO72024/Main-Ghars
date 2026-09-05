@@ -30,7 +30,7 @@
           <h1 id="loginTitle">غرس الرقمي</h1>
           <p>أنظمة المدرسة التي تحتاجها كل يوم، مجتمعة في تطبيق واحد سريع ومريح.</p>
         </div>
-        <img class="login-illustration" src="assets/digital-garden.svg" alt="رسم كتاب تنمو منه أوراق المعرفة">
+        <img class="login-illustration" src="assets/digital-garden.svg" alt="رسم رقمي لأنظمة غرس المتصلة">
       </div>
 
       <div class="login-panel">
@@ -46,7 +46,7 @@
           <form id="loginForm" novalidate>
             <label for="accessCode">كود الدخول</label>
             <div class="code-field">
-              <input id="accessCode" name="accessCode" type="password" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24" placeholder="مثال: A1989" required>
+              <input id="accessCode" name="accessCode" type="password" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24" placeholder="مثال: A0000" required>
               <button class="icon-button" id="toggleCode" type="button" aria-label="إظهار الكود">
                 <img src="assets/icons/eye.svg" alt="">
               </button>
@@ -76,14 +76,10 @@
       </a>
       <div class="header-actions">
         <span class="connection-pill compact" id="portalConnection"><i></i><b>متصل</b></span>
-        <button class="profile-button" id="profileButton" type="button" aria-expanded="false" aria-controls="profileMenu">
-          <span class="avatar" id="headerAvatar">غ</span>
-          <span class="profile-copy"><b id="headerName">المستخدم</b><small id="headerClass">غرس</small></span>
-          <img src="assets/icons/chevron.svg" alt="">
+        <button class="logout-button" id="lockButton" type="button" aria-label="تسجيل الخروج">
+          <img src="assets/icons/logout.svg" alt="">
+          <span>تسجيل الخروج</span>
         </button>
-      </div>
-      <div class="profile-menu" id="profileMenu" hidden>
-        <button type="button" id="lockButton"><img src="assets/icons/lock.svg" alt="">قفل التطبيق</button>
       </div>
     </header>
 
@@ -138,8 +134,8 @@
 
           <button class="module-card tone-coral" type="button" data-module="tasks">
             <span class="module-icon"><img src="assets/icons/tasks.svg" alt=""></span>
-            <span class="module-content"><b>التذكيرات والمهام</b><small>جاهز لربط نظام المهام الحالي</small></span>
-            <span class="module-status pending-link">بانتظار الربط</span>
+            <span class="module-content"><b>دفتر التحضير</b><small>مساحة التحضير الرقمي للمعلمات</small></span>
+            <span class="module-status pending-link">قريباً...</span>
             <img class="module-arrow" src="assets/icons/arrow.svg" alt="">
           </button>
 

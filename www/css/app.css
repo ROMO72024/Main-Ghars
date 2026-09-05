@@ -97,11 +97,11 @@ img { display: block; max-width: 100%; }
 .connection-pill i { width: 7px; height: 7px; border-radius: 50%; background: #bcdc73; box-shadow: 0 0 0 4px rgba(188, 220, 115, .16); }
 .connection-pill.offline i { background: #f0b2ad; box-shadow: 0 0 0 4px rgba(240, 178, 173, .14); }
 .login-logo { width: 94px; height: 94px; object-fit: contain; margin: 48px 0 18px auto; filter: brightness(0) invert(1); }
-.identity-copy { max-width: 510px; }
+.identity-copy { position: relative; z-index: 2; max-width: 510px; }
 .identity-copy .overline { color: #c9df84; }
 .identity-copy h1 { margin: 7px 0 10px; color: #fff; font-size: clamp(2.25rem, 5vw, 4.6rem); font-weight: 800; line-height: 1.1; letter-spacing: -.035em; }
 .identity-copy > p:last-child { max-width: 440px; margin: 0; color: rgba(255, 255, 255, .8); font-size: 1rem; line-height: 1.9; }
-.login-illustration { position: absolute; width: min(580px, 89%); left: -10px; bottom: -12px; max-height: 330px; object-fit: contain; object-position: left bottom; }
+.login-illustration { position: absolute; z-index: 1; width: min(470px, 74%); left: 5px; bottom: 6px; max-height: 285px; object-fit: contain; object-position: left bottom; pointer-events: none; }
 .login-panel { display: flex; flex-direction: column; justify-content: center; padding: 48px 50px 26px; background: var(--paper); }
 .login-form-wrap { width: min(390px, 100%); margin: auto; }
 .login-mini-brand { display: none; align-items: center; gap: 10px; margin-bottom: 34px; color: var(--plum); font-weight: 800; }
@@ -173,23 +173,15 @@ form label { display: block; margin: 0 2px 8px; color: var(--ink); font-size: .8
 }
 .portal-brand { display: inline-flex; align-items: center; gap: 11px; color: var(--ink); text-decoration: none; }
 .portal-brand img { width: 49px; height: 49px; object-fit: contain; }
-.portal-brand span, .profile-copy { display: flex; flex-direction: column; gap: 2px; }
+.portal-brand span { display: flex; flex-direction: column; gap: 2px; }
 .portal-brand b { font-size: .97rem; }
 .portal-brand small { color: var(--muted); font-size: .65rem; }
 .header-actions { display: flex; align-items: center; gap: 11px; }
 .connection-pill.compact { background: #eaf3dd; color: var(--green-dark); }
 .connection-pill.compact.offline { background: #f9e8e9; color: var(--danger); }
-.profile-button { min-height: 50px; padding: 5px 8px 5px 13px; border: 1px solid var(--line); border-radius: 16px; display: flex; align-items: center; gap: 9px; color: var(--text); background: var(--paper); }
-.profile-button > img { width: 16px; height: 16px; opacity: .6; }
-.avatar { width: 37px; height: 37px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(145deg, var(--plum), #6e1043); color: #fff; font-weight: 800; }
-.profile-copy { text-align: right; max-width: 150px; }
-.profile-copy b, .profile-copy small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.profile-copy b { color: var(--ink); font-size: .76rem; }
-.profile-copy small { color: var(--muted); font-size: .64rem; }
-.profile-menu { position: absolute; top: calc(100% - 8px); left: max(24px, calc((100vw - 1160px) / 2)); width: 190px; padding: 7px; border: 1px solid var(--line); border-radius: 14px; background: #fff; box-shadow: var(--shadow-soft); }
-.profile-menu button { width: 100%; min-height: 43px; border: 0; border-radius: 10px; display: flex; align-items: center; gap: 9px; padding: 0 11px; background: transparent; color: var(--text); }
-.profile-menu button:hover { background: var(--canvas); }
-.profile-menu img { width: 18px; height: 18px; }
+.logout-button { min-height: 48px; padding: 0 15px; border: 1px solid rgba(148, 23, 95, .14); border-radius: 15px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; color: var(--plum); background: var(--paper); font-size: .72rem; font-weight: 800; box-shadow: 0 5px 15px rgba(57, 49, 53, .04); }
+.logout-button img { width: 19px; height: 19px; }
+.logout-button:active { transform: translateY(1px); background: var(--plum-soft); }
 .portal-main { width: min(1160px, calc(100% - 38px)); margin: 30px auto; }
 .view-section { animation: reveal .3s ease both; }
 @keyframes reveal { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
@@ -311,9 +303,10 @@ form label { display: block; margin: 0 2px 8px; color: var(--ink); font-size: .8
   .identity-topline .brand-kicker { display: none; }
   .identity-topline { justify-content: flex-end; }
   .login-logo { width: 67px; height: 67px; margin: 13px 0 5px auto; }
-  .identity-copy h1 { margin: 4px 0 5px; font-size: 2.4rem; }
-  .identity-copy > p:last-child { max-width: 280px; font-size: .78rem; line-height: 1.7; }
-  .login-illustration { width: 300px; max-height: 190px; left: -21px; bottom: -5px; }
+  .identity-copy { width: calc(100% - 132px); min-width: 194px; }
+  .identity-copy h1 { margin: 4px 0 5px; font-size: 2.22rem; white-space: nowrap; }
+  .identity-copy > p:last-child { max-width: 215px; font-size: .76rem; line-height: 1.65; }
+  .login-illustration { width: 160px; max-height: 145px; left: 4px; bottom: 11px; }
   .login-panel { min-height: calc(100dvh - 320px); padding: 34px 25px max(22px, var(--safe-bottom)); justify-content: flex-start; }
   .login-form-wrap { width: 100%; }
   .login-panel h2 { font-size: 1.65rem; }
@@ -321,11 +314,9 @@ form label { display: block; margin: 0 2px 8px; color: var(--ink); font-size: .8
   .login-footnote { margin-top: 24px; }
   .portal-header { min-height: 70px; padding: max(9px, var(--safe-top)) 15px 9px; }
   .portal-brand img { width: 43px; height: 43px; }
-  .portal-brand small, .connection-pill.compact, .profile-copy { display: none; }
-  .profile-button { min-height: 45px; padding: 4px; border: 0; background: transparent; }
-  .profile-button > img { display: none; }
-  .avatar { width: 39px; height: 39px; }
-  .profile-menu { left: 15px; top: calc(100% - 4px); }
+  .portal-brand small, .connection-pill.compact { display: none; }
+  .logout-button { min-height: 43px; padding: 0 12px; border-radius: 13px; font-size: .68rem; }
+  .logout-button img { width: 18px; height: 18px; }
   .portal-main { width: min(100% - 26px, 660px); margin: 18px auto 96px; }
   .welcome-card { min-height: 250px; grid-template-columns: 1fr; align-items: start; padding: 25px 23px; }
   .welcome-copy { max-width: 75%; }
@@ -361,6 +352,10 @@ form label { display: block; margin: 0 2px 8px; color: var(--ink); font-size: .8
 
 @media (max-width: 410px) {
   .login-identity { min-height: 300px; }
+  .identity-copy { width: calc(100% - 118px); min-width: 180px; }
+  .identity-copy h1 { font-size: 2.02rem; }
+  .identity-copy > p:last-child { max-width: 198px; font-size: .71rem; }
+  .login-illustration { width: 142px; max-height: 130px; left: 1px; bottom: 9px; }
   .login-panel { min-height: calc(100dvh - 300px); padding-top: 27px; }
   .login-features { gap: 9px; }.login-features small { display: none; }
   .welcome-copy { max-width: 82%; }

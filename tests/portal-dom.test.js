@@ -55,7 +55,7 @@ async function submitLogin(window, code) {
   assert.equal(teacher.dom.window.document.getElementById("loginView").hidden, true);
   assert.equal(teacher.dom.window.document.getElementById("portalView").hidden, false);
   assert.equal(teacher.dom.window.document.getElementById("adminModule").hidden, true);
-  assert.equal(teacher.dom.window.document.getElementById("headerName").textContent, "آلاء عياش");
+  assert.equal(teacher.dom.window.document.getElementById("lockButton").textContent.trim(), "تسجيل الخروج");
   const attendanceState = JSON.parse(teacher.dom.window.localStorage.getItem("ghars.state.v4"));
   assert.equal(attendanceState.teacherId, "A1989");
   assert.equal(attendanceState.marks["ليان"], "غائب");
@@ -71,6 +71,8 @@ async function submitLogin(window, code) {
   const offlineAttendanceState = JSON.parse(teacher.dom.window.localStorage.getItem("ghars.state.v4"));
   assert.equal(offlineAttendanceState.teacherId, "A1989");
   assert.equal(offlineAttendanceState.marks["ليان"], "غائب");
+  teacher.dom.window.document.querySelector('[data-module="tasks"]').click();
+  assert.match(teacher.dom.window.document.getElementById("toasts").textContent, /دفتر التحضير.*قريباً/);
   assert.deepEqual(teacher.errors, []);
   teacher.dom.window.close();
 

@@ -191,9 +191,6 @@
 
     $("loginView").hidden = true;
     $("portalView").hidden = false;
-    $("headerName").textContent = profile.teacherName;
-    $("headerClass").textContent = profile.role === "admin" ? "مدير النظام" : (profile.className || "كادر غرس");
-    $("headerAvatar").textContent = initials(profile.teacherName);
     $("welcomeName").textContent = firstName(profile.teacherName);
     $("welcomeSubtitle").textContent = profile.role === "admin"
       ? "لوحة التحكم وجميع أنظمة غرس بين يديك."
@@ -300,8 +297,6 @@
     removeKey(ATT_STATE_KEY);
     $("portalView").hidden = true;
     $("loginView").hidden = false;
-    $("profileMenu").hidden = true;
-    $("profileButton").setAttribute("aria-expanded", "false");
     $("accessCode").value = "";
     setMessage($("loginMessage"), "");
     setTimeout(function () { $("accessCode").focus(); }, 50);
@@ -333,6 +328,7 @@
     if (name === "admin") { showView("admin"); return; }
     var module = CFG.modules[name];
     if (!module) return;
+    if (module.comingSoon) { toast("دفتر التحضير سيكون متاحاً قريباً."); return; }
     if (module.online && !navigator.onLine) { toast("هذا النظام يحتاج اتصالاً بالإنترنت.", "bad"); return; }
     if (module.local) {
       window.location.href = module.local;
@@ -341,7 +337,7 @@
     var remoteUrl = state.profile && state.profile.moduleLinks ? state.profile.moduleLinks[name] : "";
     var targetUrl = String(remoteUrl || module.external || "").trim();
     if (!targetUrl) {
-      toast(name === "tasks" ? "أرسل رابط نظام التذكيرات والمهام لإتمام ربطه." : "رابط هذا النظام غير مهيأ بعد.");
+      toast("رابط هذا النظام غير مهيأ بعد.");
       return;
     }
     openExternal(targetUrl);
@@ -524,10 +520,6 @@
       input.type = reveal ? "text" : "password";
       this.setAttribute("aria-label", reveal ? "إخفاء الكود" : "إظهار الكود");
     });
-    $("profileButton").addEventListener("click", function () {
-      var menu = $("profileMenu"); menu.hidden = !menu.hidden;
-      this.setAttribute("aria-expanded", String(!menu.hidden));
-    });
     $("lockButton").addEventListener("click", lockPortal);
     $("refreshStatus").addEventListener("click", function () { updateConnectivity(); paintNextClass(); toast(navigator.onLine ? "الاتصال متاح" : "التطبيق في وضع عدم الاتصال"); });
     document.querySelectorAll("[data-module]").forEach(function (button) { button.addEventListener("click", function () { openModule(this.getAttribute("data-module")); }); });
@@ -542,11 +534,6 @@
     $("acceptConfirm").addEventListener("click", acceptDelete);
     window.addEventListener("online", function () { updateConnectivity(); toast("عاد الاتصال بالإنترنت", "good"); });
     window.addEventListener("offline", function () { updateConnectivity(); toast("تم تفعيل العمل دون إنترنت"); });
-    document.addEventListener("click", function (event) {
-      if (!$("profileMenu").hidden && !$("profileMenu").contains(event.target) && !$("profileButton").contains(event.target)) {
-        $("profileMenu").hidden = true; $("profileButton").setAttribute("aria-expanded", "false");
-      }
-    });
     document.addEventListener("keydown", function (event) {
       if (event.key !== "Escape") return;
       ["teacherModal", "adminCodeModal"].forEach(function (id) { if (!$(id).hidden) closeModal(id); });

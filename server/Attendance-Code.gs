@@ -47,7 +47,7 @@ const PORTAL_AUTH_SECRET_PROPERTY = "GHARS_PORTAL_AUTH_SECRET";
 const PORTAL_PLAN_URL_PROPERTY = "GHARS_PORTAL_PLAN_URL";
 const PORTAL_TASKS_URL_PROPERTY = "GHARS_PORTAL_TASKS_URL";
 const PORTAL_TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000;
-const PORTAL_VERSION = "1.0.0";
+const PORTAL_VERSION = "1.0.1";
 const PORTAL_AI_GAMES_URL = "https://ghars-ai-games.romo7iv.chatgpt.site/";
 
 /* ====================== نقاط الدخول ====================== */
