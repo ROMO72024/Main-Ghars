@@ -1,0 +1,17 @@
+{
+  "name": "الحضور والغياب — مدرسة وروضة غرس الحديثة",
+  "short_name": "غرس الحضور",
+  "description": "تسجيل حضور وغياب الطلاب، يعمل بدون إنترنت ويزامن تلقائياً.",
+  "lang": "ar",
+  "dir": "rtl",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#EDF3EF",
+  "theme_color": "#073E31",
+  "icons": [
+    { "src": "logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

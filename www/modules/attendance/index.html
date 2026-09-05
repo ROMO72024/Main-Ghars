@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#073E31">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="سجل الحضور والغياب — مدرسة وروضة غرس الحديثة">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="logo.png">
+  <link rel="stylesheet" href="styles.css?v=5.3.0">
+  <title>الحضور والغياب — غرس</title>
+</head>
+
+<body>
+  <a class="portal-return" href="../../index.html" aria-label="العودة إلى غرس الرقمي">
+    <span>‹</span><b>غرس الرقمي</b>
+  </a>
+  <!-- تسجيل الدخول -->
+  <section id="gate">
+    <div class="gate-card">
+      <div class="gate-brand">
+        <div class="brand-mark">
+          <img src="logo.png" alt="شعار غرس">
+        </div>
+        <div class="brand-copy">
+          <span class="brand-chip">غرس الحديثة</span>
+          <h1>سجل الحضور<br>والغياب</h1>
+          <p>مدرسة وروضة غرس الحديثة</p>
+        </div>
+      </div>
+
+      <div class="gate-form">
+        <div class="form-kicker"><i></i><span>دخول المعلمة</span></div>
+        <label for="code">رمز الدخول</label>
+        <input
+          id="code"
+          type="text"
+          inputmode="text"
+          autocomplete="off"
+          enterkeyhint="go"
+          placeholder="مثال: A1000">
+        <button class="btn-main" id="enter">دخول إلى السجل</button>
+        <div class="offline-note">
+          <i></i>
+          <span>بعد الدخول الأول يمكنك استخدام السجل دون إنترنت</span>
+        </div>
+        <div class="note" id="gate-note" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- التطبيق -->
+  <div id="app">
+    <header class="top">
+      <div class="top-brand">
+        <div class="top-logo"><img src="logo.png" alt="شعار غرس"></div>
+        <div class="who">
+          <b id="t-name"></b>
+          <span id="t-class"></span>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <button class="ico" id="btn-sync" data-n="0" aria-label="مزامنة البيانات">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12a9 9 0 1 1-2.6-6.4"></path>
+            <path d="M21 3v6h-6"></path>
+          </svg>
+        </button>
+        <button class="ico" id="btn-menu" aria-label="فتح الخيارات">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 7h14M5 12h14M5 17h14"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="wire ok" id="wire" role="status" aria-live="polite">
+      <i></i><span id="wire-txt">محفوظ</span>
+    </div>
+
+    <main>
+      <section class="day" aria-label="ملخص حضور اليوم">
+        <div class="day-copy">
+          <span class="day-kicker">سجل اليوم</span>
+          <div class="day-line">
+            <div>
+              <span class="day-name" id="d-day">اليوم</span>
+              <b id="d-date"></b>
+            </div>
+            <span class="student-count" id="d-count"></span>
+          </div>
+        </div>
+
+        <div class="tally" aria-label="أعداد حالات الحضور">
+          <div class="t-p"><i></i><b id="c-p">0</b><span>حاضر</span></div>
+          <div class="t-a"><i></i><b id="c-a">0</b><span>غائب</span></div>
+          <div class="t-e"><i></i><b id="c-e">0</b><span>مأذون</span></div>
+        </div>
+      </section>
+
+      <section class="roster-panel" aria-labelledby="roster-title">
+        <div class="roster-head">
+          <div>
+            <span>قائمة الصف</span>
+            <h2 id="roster-title">الطلاب</h2>
+          </div>
+          <div class="legend" aria-hidden="true">
+            <span class="lg-p"><i></i>حاضر</span>
+            <span class="lg-a"><i></i>غائب</span>
+            <span class="lg-e"><i></i>مأذون</span>
+          </div>
+        </div>
+        <div id="roster"></div>
+      </section>
+    </main>
+
+    <nav class="dock" aria-label="إجراءات الحضور">
+      <button class="side add-action" id="btn-add">إضافة طالب</button>
+      <button class="side sum-action" id="btn-sum">الملخص</button>
+      <button class="submit" id="btn-submit">تسليم الحضور</button>
+    </nav>
+  </div>
+
+  <div id="toasts" aria-live="polite"></div>
+
+  <!-- إضافة طالب -->
+  <div class="veil" id="v-add">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="add-title">
+      <div class="grip"></div>
+      <span class="sheet-kicker">قائمة الصف</span>
+      <h2 id="add-title">إضافة طالب</h2>
+      <label for="i-add">اسم الطالب</label>
+      <input id="i-add" type="text" autocomplete="off" placeholder="الاسم الكامل">
+      <div class="pair">
+        <button class="go" id="do-add">إضافة</button>
+        <button class="no" data-close>إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- تعديل الاسم -->
+  <div class="veil" id="v-ren">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="rename-title">
+      <div class="grip"></div>
+      <span class="sheet-kicker">بيانات الطالب</span>
+      <h2 id="rename-title">تعديل اسم الطالب</h2>
+      <div class="warn">سيُحدَّث الاسم في كل سجلات الحضور السابقة.</div>
+      <label for="i-ren">الاسم الجديد</label>
+      <input id="i-ren" type="text" autocomplete="off">
+      <div class="pair">
+        <button class="go" id="do-ren">حفظ</button>
+        <button class="no" data-close>إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- خيارات الطالب -->
+  <div class="veil" id="v-row">
+    <div class="sheet menu" role="dialog" aria-modal="true" aria-labelledby="row-h">
+      <div class="grip"></div>
+      <span class="sheet-kicker">خيارات الطالب</span>
+      <h2 id="row-h"></h2>
+      <button id="row-ren">تعديل الاسم</button>
+      <button class="danger" id="row-del">حذف من القائمة</button>
+      <hr>
+      <button data-close>إلغاء</button>
+    </div>
+  </div>
+
+  <!-- خيارات التطبيق -->
+  <div class="veil" id="v-menu">
+    <div class="sheet menu" role="dialog" aria-modal="true" aria-labelledby="menu-title">
+      <div class="grip"></div>
+      <span class="sheet-kicker">إدارة السجل</span>
+      <h2 id="menu-title">خيارات</h2>
+      <button id="m-pull">تحديث البيانات من الشيت</button>
+      <hr>
+      <button class="danger" id="m-out">تسجيل الخروج</button>
+      <button data-close>إغلاق</button>
+    </div>
+  </div>
+
+  <!-- ملخص اليوم -->
+  <div class="veil" id="v-sum">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="summary-title">
+      <div class="grip"></div>
+      <span class="sheet-kicker">نظرة سريعة</span>
+      <h2 id="summary-title">ملخص اليوم</h2>
+      <div class="tally summary-tally">
+        <div class="t-p"><i></i><b id="s-p">0</b><span>حاضر</span></div>
+        <div class="t-a"><i></i><b id="s-a">0</b><span>غائب</span></div>
+        <div class="t-e"><i></i><b id="s-e">0</b><span>مأذون</span></div>
+      </div>
+      <div class="absentees" id="s-list"></div>
+      <div class="pair"><button class="no" data-close>إغلاق</button></div>
+    </div>
+  </div>
+
+  <script src="../../cordova.js"></script>
+  <script src="app.js?v=5.1.2"></script>
+</body>
+</html>

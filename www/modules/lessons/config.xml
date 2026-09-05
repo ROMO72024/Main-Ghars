@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.romodemo.ghars" version="2.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>منبّه غرس</name>
+  <description>منبّه حصص مدرسة وروضة غرس الحديثة</description>
+  <author>مدرسة وروضة غرس الحديثة</author>
+  <content src="index.html" />
+  <access origin="*" />
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <preference name="DisallowOverscroll" value="true" />
+  <preference name="Fullscreen" value="false" />
+  <preference name="Orientation" value="portrait" />
+  <preference name="AndroidLaunchMode" value="singleTop" />
+  <preference name="AndroidXEnabled" value="true" />
+  <preference name="android-minSdkVersion" value="24" />
+  <icon src="icon.png" />
+  <platform name="android">
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+      <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    </config-file>
+  </platform>
+</widget>

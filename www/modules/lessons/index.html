@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#83145f">
+  <meta name="color-scheme" content="light">
+  <title>غرس | منبّه الحصص</title>
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="../../cordova.js"></script>
+</head>
+<body>
+  <a class="portal-return" href="../../index.html" aria-label="العودة إلى غرس الرقمي"><span>‹</span><b>غرس الرقمي</b></a>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-logo"><img src="icon.png" alt="شعار منبّه غرس"></span>
+        <span>
+          <strong>منبّه غرس</strong>
+          <small>مدرسة وروضة غرس الحديثة</small>
+        </span>
+      </div>
+      <button class="icon-button" id="headerAddBtn" type="button" aria-label="إضافة حصة"><span aria-hidden="true">＋</span></button>
+    </header>
+
+    <main>
+      <section class="hero-card" aria-labelledby="todayHeading">
+        <div class="hero-copy">
+          <p class="eyebrow" id="todayDate">جدول اليوم</p>
+          <h1 id="todayHeading">حصصك في موعدها</h1>
+          <p id="nextClassText">أضف حصصك وسيعمل التنبيه تلقائيًا دون إنترنت.</p>
+        </div>
+        <div class="today-count" aria-label="عدد حصص اليوم"><strong id="todayCount">0</strong><span>حصة اليوم</span></div>
+      </section>
+
+      <section class="status-card" id="notificationStatus" aria-live="polite">
+        <span class="status-icon" aria-hidden="true">🔔</span>
+        <span class="status-copy">
+          <strong id="statusTitle">جاهز للتنبيه</strong>
+          <small id="statusText">سيُطلب إذن الإشعارات عند أول تشغيل.</small>
+        </span>
+        <button class="text-button hidden" id="exactAlarmBtn" type="button">ضبط الدقة</button>
+      </section>
+
+      <section class="quick-actions" aria-label="إجراءات سريعة">
+        <button class="primary-action" id="mainAddBtn" type="button"><span aria-hidden="true">＋</span>إضافة حصة</button>
+        <button class="secondary-action" id="testNotificationBtn" type="button"><span aria-hidden="true">♫</span>تجربة الصوت</button>
+      </section>
+
+      <section class="schedule-section" aria-labelledby="scheduleHeading">
+        <div class="section-heading">
+          <div><p class="eyebrow">الجدول الأسبوعي</p><h2 id="scheduleHeading">الحصص</h2></div>
+          <span class="class-total" id="classTotal">0 حصة</span>
+        </div>
+        <nav class="days-nav" id="daysNav" aria-label="أيام الأسبوع"></nav>
+        <div class="classes-list" id="classesList" aria-live="polite"></div>
+      </section>
+    </main>
+  </div>
+
+  <button class="fab" id="floatingAddBtn" type="button" aria-label="إضافة حصة جديدة">＋</button>
+
+  <div class="modal" id="classModal" aria-hidden="true">
+    <button class="modal-backdrop" id="modalBackdrop" type="button" aria-label="إغلاق"></button>
+    <section class="modal-sheet" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="modal-heading">
+        <div><p class="eyebrow">تفاصيل الجدول</p><h2 id="modalTitle">إضافة حصة جديدة</h2></div>
+        <button class="close-button" id="closeModalBtn" type="button" aria-label="إغلاق">×</button>
+      </div>
+
+      <form id="classForm" novalidate>
+        <input type="hidden" id="classId">
+        <div class="field">
+          <label for="subjectName">اسم المادة أو البرنامج</label>
+          <input type="text" id="subjectName" maxlength="80" placeholder="مثال: اللغة العربية" autocomplete="off" required>
+        </div>
+        <div class="field">
+          <label for="gradeName">الصف أو الشعبة</label>
+          <input type="text" id="gradeName" maxlength="80" placeholder="مثال: الأول - 1" autocomplete="off" required>
+        </div>
+        <div class="field">
+          <label for="classDay">اليوم</label>
+          <select id="classDay" required>
+            <option value="0">الأحد</option><option value="1">الإثنين</option><option value="2">الثلاثاء</option>
+            <option value="3">الأربعاء</option><option value="4">الخميس</option><option value="5">الجمعة</option><option value="6">السبت</option>
+          </select>
+        </div>
+        <div class="time-grid">
+          <div class="field"><label for="startTime">وقت البداية</label><input type="time" id="startTime" value="11:40" step="60" required></div>
+          <div class="field"><label for="endTime">وقت النهاية</label><input type="time" id="endTime" value="11:55" step="60" required></div>
+        </div>
+        <div class="field reminder-field">
+          <label for="reminderMins">التنبيه قبل الحصة</label>
+          <div class="number-input"><input type="number" id="reminderMins" value="5" min="0" step="1" inputmode="numeric" required><span>دقيقة</span></div>
+          <small>اكتب عدد الدقائق الذي تريده قبل بداية الحصة.</small>
+        </div>
+        <p class="form-error" id="formError" role="alert"></p>
+        <div class="modal-actions">
+          <button class="save-button" type="submit">حفظ وجدولة التنبيه</button>
+          <button class="cancel-button" id="cancelModalBtn" type="button">إلغاء</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="schedule-core.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

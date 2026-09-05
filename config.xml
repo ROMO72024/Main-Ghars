@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.ghars.digital" version="1.0.0" android-versionCode="10000"
+  xmlns="http://www.w3.org/ns/widgets"
+  xmlns:cdv="http://cordova.apache.org/ns/1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>غرس الرقمي</name>
+  <description>بوابة أنظمة مدرسة وروضة غرس الحديثة</description>
+  <author>مدرسة وروضة غرس الحديثة</author>
+  <content src="index.html" />
+
+  <access origin="https://script.google.com" />
+  <access origin="https://script.googleusercontent.com" />
+  <access origin="https://ghars-ai-games.romo7iv.chatgpt.site" />
+  <allow-intent href="https://*/*" />
+  <allow-intent href="http://*/*" />
+
+  <preference name="scheme" value="https" />
+  <preference name="hostname" value="localhost" />
+  <preference name="DisallowOverscroll" value="true" />
+  <preference name="Fullscreen" value="false" />
+  <preference name="Orientation" value="default" />
+  <preference name="AndroidLaunchMode" value="singleTop" />
+  <preference name="AndroidXEnabled" value="true" />
+  <preference name="AndroidEdgeToEdge" value="true" />
+  <preference name="android-minSdkVersion" value="24" />
+  <preference name="android-targetSdkVersion" value="36" />
+  <preference name="android-compileSdkVersion" value="36" />
+  <preference name="AndroidWindowSplashScreenBackground" value="#F5F8F5" />
+  <preference name="AndroidWindowSplashScreenIconBackgroundColor" value="#F5F8F5" />
+  <preference name="AndroidWindowSplashScreenAnimatedIcon" value="www/icon.png" />
+  <preference name="AndroidWindowSplashScreenAnimationDuration" value="250" />
+
+  <icon src="www/icon.png" />
+
+  <platform name="android">
+    <config-file target="AndroidManifest.xml" parent="/*">
+      <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+      <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    </config-file>
+  </platform>
+</widget>

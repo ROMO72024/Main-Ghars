@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420" role="img" aria-labelledby="title desc">
+  <title id="title">حديقة غرس الرقمية</title>
+  <desc id="desc">كتاب مفتوح تنمو منه أوراق وعناصر تعليمية</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#f9ecef"/></linearGradient>
+    <linearGradient id="plum" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b42378"/><stop offset="1" stop-color="#741047"/></linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b7d06d"/><stop offset="1" stop-color="#71963f"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#58103a" flood-opacity=".18"/></filter>
+  </defs>
+  <ellipse cx="350" cy="368" rx="244" ry="25" fill="#681342" opacity=".1"/>
+  <g filter="url(#shadow)">
+    <path d="M116 245c80-28 151-18 225 39v91c-70-46-142-58-225-35z" fill="url(#paper)"/>
+    <path d="M565 245c-79-28-150-18-224 39v91c69-46 141-58 224-35z" fill="#fff"/>
+    <path d="M341 284v91" stroke="#d9b6c9" stroke-width="4"/>
+    <path d="M142 273c61-14 119-3 171 27M142 301c54-10 102-2 144 18" fill="none" stroke="#d5d9d4" stroke-width="5" stroke-linecap="round"/>
+    <path d="M539 273c-61-14-119-3-171 27M539 301c-54-10-102-2-144 18" fill="none" stroke="#d5d9d4" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <path d="M341 285c-2-91 17-147 59-184" fill="none" stroke="url(#plum)" stroke-width="13" stroke-linecap="round"/>
+  <path d="M363 215c42-54 100-62 139-35-17 51-73 67-139 35z" fill="url(#green)"/>
+  <path d="M381 173c-34-51-23-106 11-137 44 31 50 86-11 137z" fill="url(#plum)"/>
+  <path d="M343 247c-37-47-86-54-121-28 19 43 67 54 121 28z" fill="url(#green)"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M139 123h63v53h-63zM151 123V99h39v24" stroke="#fff" stroke-width="8" opacity=".9"/>
+    <path d="M531 100l13 25 28 4-20 20 5 28-26-13-25 13 5-28-20-20 28-4z" stroke="#edd175" stroke-width="7"/>
+    <circle cx="104" cy="218" r="22" stroke="#a9c95f" stroke-width="7"/>
+    <path d="M104 207v13l9 8" stroke="#a9c95f" stroke-width="7"/>
+  </g>
+  <g fill="#fff" opacity=".8"><circle cx="242" cy="99" r="7"/><circle cx="284" cy="61" r="5"/><circle cx="541" cy="223" r="6"/><circle cx="577" cy="204" r="4"/></g>
+</svg>

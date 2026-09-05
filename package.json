@@ -1,0 +1,35 @@
+{
+  "name": "ghars-digital-app",
+  "displayName": "غرس الرقمي",
+  "version": "1.0.0",
+  "description": "بوابة أنظمة مدرسة وروضة غرس الحديثة",
+  "private": true,
+  "scripts": {
+    "test": "node tests/portal.test.js && node tests/structure.test.js && node tests/portal-dom.test.js && node tests/server-auth.test.js && node www/modules/lessons/tests/schedule-core.test.js",
+    "prepare:android": "cordova prepare android",
+    "build:debug": "cordova build android --debug -- --packageType=apk",
+    "build:release": "cordova build android --release -- --packageType=bundle"
+  },
+  "dependencies": {
+    "cordova-android": "15.1.0",
+    "cordova-plugin-device": "3.0.0",
+    "cordova-plugin-inappbrowser": "7.0.0",
+    "cordova-plugin-local-notification": "1.2.3"
+  },
+  "devDependencies": {
+    "cordova": "13.0.0",
+    "jsdom": "^26.1.0"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-device": {},
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-local-notification": {
+        "ANDROIDX_CORE_VERSION": "1.12.0"
+      }
+    },
+    "platforms": [
+      "android"
+    ]
+  }
+}
